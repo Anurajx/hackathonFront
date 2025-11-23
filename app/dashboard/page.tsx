@@ -1,8 +1,11 @@
+// anurajx/hackathonfront/Anurajx-hackathonFront-ff5e466210bfd2bb3b8b04adc729d82a8163b594/app/dashboard/page.tsx
+
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Mic, MessageSquare, Calendar, Settings, LogOut } from "lucide-react";
+import { Mic, MessageSquare, Settings, LogOut } from "lucide-react";
 import { SignOutButton } from "@clerk/nextjs";
+import { JiraEventsWidget } from "./JiraEventsWidget"; // Import the new component
 
 export default async function Dashboard() {
   const { userId } = await auth();
@@ -12,12 +15,16 @@ export default async function Dashboard() {
     redirect("/sign-in");
   }
 
+  // The userId is passed to the widget for dynamic data fetching
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Header */}
+      {/* Header (omitted for brevity) */}
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Meeting Assistant</h1>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Meeting Assistant
+          </h1>
           <div className="flex items-center gap-4">
             {user?.imageUrl && (
               <img
@@ -30,7 +37,9 @@ export default async function Dashboard() {
               <p className="font-semibold text-gray-900">
                 {user?.firstName} {user?.lastName}
               </p>
-              <p className="text-sm text-gray-500">{user?.emailAddresses[0]?.emailAddress}</p>
+              <p className="text-sm text-gray-500">
+                {user?.emailAddresses[0]?.emailAddress}
+              </p>
             </div>
             <SignOutButton>
               <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
@@ -53,62 +62,57 @@ export default async function Dashboard() {
           </p>
         </div>
 
-        {/* Quick Actions Grid */}
+        {/* Quick Actions Grid (omitted for brevity) */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Record Meeting Card */}
-          <Link href="/dashboard/record-meeting">
+          <Link href="#/dashboard/record-meeting">
             <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-blue-500">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center">
                   <Mic className="w-7 h-7 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">Record Meeting</h3>
-                  <p className="text-sm text-gray-500">Start a new meeting recording</p>
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    Record Meeting
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    Start a new meeting recording
+                  </p>
                 </div>
               </div>
               <p className="text-gray-600">
-                Record your meeting with real-time transcription. AI will automatically extract
-                action items and sync them to Trello/Jira.
+                Record your meeting with real-time transcription. AI will
+                automatically extract action items and sync them to Trello/Jira.
               </p>
             </div>
           </Link>
 
           {/* Send Voice Note Card */}
-          <Link href="/dashboard/send-voice-note">
+          <Link href="#/dashboard/send-voice-note">
             <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-purple-500">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center">
                   <MessageSquare className="w-7 h-7 text-purple-600" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">Send Voice Note</h3>
-                  <p className="text-sm text-gray-500">Send a task via voice message</p>
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    Send Voice Note
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    Send a task via voice message
+                  </p>
                 </div>
               </div>
               <p className="text-gray-600">
-                Send a voice note to assign tasks. The AI will parse deadlines and automatically
-                add them to the recipient's Trello/Jira.
+                Send a voice note to assign tasks. The AI will parse deadlines
+                and automatically add them to the recipient's Trello/Jira.
               </p>
             </div>
           </Link>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <Calendar className="w-6 h-6 text-gray-600" />
-            <h3 className="text-xl font-semibold text-gray-900">Recent Activity</h3>
-          </div>
-          <div className="space-y-4">
-            <div className="p-4 bg-gray-50 rounded-lg">
-              <p className="text-gray-600">
-                <span className="font-semibold">No recent activity yet.</span> Start by recording
-                a meeting or sending a voice note to see your tasks here.
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Dynamic Jira Events Widget - Plugged in here */}
+        <JiraEventsWidget userId={userId} />
 
         {/* Settings Link */}
         <div className="mt-6">
@@ -124,4 +128,3 @@ export default async function Dashboard() {
     </div>
   );
 }
-
