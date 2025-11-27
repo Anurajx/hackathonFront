@@ -1,0 +1,8 @@
+what we previously had-
+when backend used to run we had to manually input the transcribe of text to the backend Ui manually (built using python) then that used to send data to the Jira backend based on the dicrete texts that was summarized by grok from transcribe. 
+the user then could access the schedule/ todo from the custom portal that I made there was no functionally to edit or update the status.
+
+What I am thinking of doing now-
+now I want to bridge the gap between the Ui of backend and the user side so that there is no manual interreference from the backend side. so what I was planning is integrating the recording meeting/ Voice note MP3 and then sending it to backend to get transcribed, processed , scheduled and  send it to jira backend. after that part is done the user that recorded that meeting or voice note will be able to look at processed schooled To-do's in the same console from which he recorded the meeting [assuming the person is some manager or something like that], after which the tasks are condfirmed the tasks will be assigned to respective employees who can manage there tasks on jira interface itself.
+
+so after only user facing thing will be when the manager records the meeting and rest everything on his consile then that mp3 is sent to out servers rest everything is done by us. after all this manager can also see the list of most recent assigned tasks. 

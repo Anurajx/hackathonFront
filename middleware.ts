@@ -3,16 +3,18 @@ import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
-  "/sign-in(.*)",
+  "/hero(.*)",
   "/sign-up(.*)",
+  "/sign-in(.*)",
+  "/voiceNote(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
   const { userId } = await auth();
-  
+
   if (!isPublicRoute(request)) {
     if (!userId) {
-      const signInUrl = new URL("/sign-in", request.url);
+      const signInUrl = new URL("/hero", request.url);
       return NextResponse.redirect(signInUrl);
     }
   }
@@ -24,4 +26,3 @@ export const config = {
     "/(api|trpc)(.*)",
   ],
 };
-

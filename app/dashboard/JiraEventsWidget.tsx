@@ -123,6 +123,7 @@ async function fetchJiraEvents(
 
 interface JiraEventsWidgetProps {
   userEmail: string;
+  userId: string;
 }
 
 export async function JiraEventsWidget({ userEmail }: JiraEventsWidgetProps) {

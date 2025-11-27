@@ -1,5 +1,6 @@
 // anurajx/hackathonfront/Anurajx-hackathonFront-ff5e466210bfd2bb3b8b04adc729d82a8163b594/app/dashboard/page.tsx
 
+//THIS IS NOT USED ANYMORE. USE DASHBOARD PAGE
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -12,7 +13,7 @@ export default async function Dashboard() {
   const user = await currentUser();
 
   if (!userId) {
-    redirect("/sign-in");
+    redirect("/hero");
   }
 
   // Get the primary email address to pass to the widget for authentication/filtering
@@ -69,7 +70,7 @@ export default async function Dashboard() {
         {/* Quick Actions Grid (omitted for brevity) */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Record Meeting Card */}
-          <Link href="/dashboard/record-meeting">
+          <Link href="/voiceNote">
             <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-blue-500">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -77,7 +78,7 @@ export default async function Dashboard() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900">
-                    Record Meeting
+                    Record Instance
                   </h3>
                   <p className="text-sm text-gray-500">
                     Start a new meeting recording
@@ -85,14 +86,14 @@ export default async function Dashboard() {
                 </div>
               </div>
               <p className="text-gray-600">
-                Record your meeting with real-time transcription. AI will
+                Record your sleeping with real-time transcription. AI will
                 automatically extract action items and sync them to Trello/Jira.
               </p>
             </div>
           </Link>
 
           {/* Send Voice Note Card */}
-          <Link href="/dashboard/send-voice-note">
+          <Link href="/voiceNote">
             <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-purple-500">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -117,7 +118,7 @@ export default async function Dashboard() {
 
         {/* Dynamic Jira Events Widget - Plugged in here */}
         {/* We pass the user's email for the Jira API call */}
-        <JiraEventsWidget userEmail={userEmail} />
+        <JiraEventsWidget userEmail={userEmail} userId={userId} />
 
         {/* Settings Link */}
         <div className="mt-6">

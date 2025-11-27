@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Meeting Assistant - AI-Powered Task Management",
-  description: "Record meetings, transcribe, and automatically create tasks in Trello/Jira",
+  description:
+    "Record meetings, transcribe, and automatically create tasks in Trello/Jira",
 };
 
 export default function RootLayout({
@@ -23,4 +24,3 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
-

@@ -12,7 +12,7 @@ export default async function Dashboard() {
   const user = await currentUser();
 
   if (!userId) {
-    redirect("/sign-in");
+    redirect("/hero");
   }
 
   // The userId is passed to the widget for dynamic data fetching
@@ -22,9 +22,7 @@ export default async function Dashboard() {
       {/* Header (omitted for brevity) */}
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Meeting Assistant
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900">MeetAction</h1>
           <div className="flex items-center gap-4">
             {user?.imageUrl && (
               <img
@@ -65,7 +63,7 @@ export default async function Dashboard() {
         {/* Quick Actions Grid (omitted for brevity) */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Record Meeting Card */}
-          <Link href="#/dashboard/record-meeting">
+          <Link href="/voiceNote">
             <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-blue-500">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -73,7 +71,7 @@ export default async function Dashboard() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900">
-                    Record Meeting
+                    Record Instance
                   </h3>
                   <p className="text-sm text-gray-500">
                     Start a new meeting recording
@@ -88,7 +86,7 @@ export default async function Dashboard() {
           </Link>
 
           {/* Send Voice Note Card */}
-          <Link href="#/dashboard/send-voice-note">
+          <Link href="/voiceNote">
             <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-purple-500">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -112,7 +110,10 @@ export default async function Dashboard() {
         </div>
 
         {/* Dynamic Jira Events Widget - Plugged in here */}
-        <JiraEventsWidget userId={userId} />
+        <JiraEventsWidget
+          userId={userId}
+          userEmail={user?.emailAddresses[0]?.emailAddress || ""}
+        />
 
         {/* Settings Link */}
         <div className="mt-6">

@@ -5,10 +5,14 @@ export default function SignInPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600">Sign in to your Meeting Assistant account</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Welcome Back
+          </h1>
+          <p className="text-gray-600">
+            Sign in to your Meeting Assistant account
+          </p>
         </div>
-        <SignIn 
+        <SignIn
           appearance={{
             elements: {
               rootBox: "mx-auto",
@@ -20,4 +24,3 @@ export default function SignInPage() {
     </div>
   );
 }
-
